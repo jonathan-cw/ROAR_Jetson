@@ -8,5 +8,7 @@
     "vive_tracker_name": "tracker_2",
     "motor_max": 1650,
     "motor_min": 1350,
-    "win_serial_port": "COM5"
+    "win_serial_port": "COM5",
+    "theta_max": 1800,
+    "theta_min": 1200
 }

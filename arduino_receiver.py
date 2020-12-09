@@ -30,7 +30,6 @@ class ArduinoReceiver:
 
     @staticmethod
     def _create_serial():
-        print("SERIAL CREATED")
         if 'win' in sys.platform:
             serial = Serial(port='COM5', baudrate=115200, timeout=1, writeTimeout=1)
         else:
