@@ -38,39 +38,14 @@ class ArduinoReceiver:
 
     def update(self):
         while True:
-            try:
-                vel_wheel = self.serial.readline().decode().rstrip()
-                rpm_throttle, rpm_steering = vel_wheel.split(",")
-                # self.logger.debug(f"rpm_throttle = {rpm_throttle} | rpm_steering = {rpm_steering}")
-            except Exception as e:
-                pass
-                # self.logger.error(e)
-            # vel_wheel = vel_wheel[2:][:-5]
-            # vel_wheel = vel_wheel.split()
-            # try:
-            #     throttle, steering = vel_wheel
-            #     throttle = float(throttle)
-            #     steering = float(steering)
-            # except:
-            #     continue
-            # # TODO @ Yuri, you might want to re-do this part to match the jetson_cmd_sender
-            # # https://github.com/augcog/ROAR_Jetson/blob/revamp/jetson_cmd_sender.py#L126
-            # if self.new_throttle >= MOTOR_NEUTRAL:
-            #     self.new_throttle = float(throttle - MOTOR_NEUTRAL) / (MOTOR_MAX - MOTOR_NEUTRAL)
-            # else:
-            #     self.new_throttle = float(throttle - MOTOR_NEUTRAL) / (MOTOR_NEUTRAL - MOTOR_MIN)
-            # self.new_throttle = max(-1, self.new_throttle)
-            # self.new_throttle = min(1, self.new_throttle)
-            # self.new_steering = float(steering - THETA_MIN) / (THETA_MAX - THETA_MIN) * 2 - 1
-            # self.new_steering = max(-1, self.new_steering)
-            # self.new_steering = min(1, self.new_steering)
+            self.run_threaded()
 
     def run_threaded(self, **args):
         try:
             vel_wheel = self.serial.readline().decode().rstrip()
             self.fl, self.fr, self.bl, self.br = vel_wheel.split(" , ")
         except Exception as e:
-            print(e)
+            print("Error:", e)
 
 
 if __name__ == '__main__':
