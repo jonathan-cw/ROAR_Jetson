@@ -66,14 +66,11 @@ class ArduinoReceiver:
             # self.new_steering = min(1, self.new_steering)
 
     def run_threaded(self, **args):
-        if self.new_throttle != self.old_throttle:
-            msg = struct.pack('>Ii', COMMAND_THROTTLE, int(self.new_throttle * 32767))
-            self.sock.sendto(msg, (self.client_ip, UDP_PORT))
-            self.old_throttle = self.new_throttle
-        if self.new_steering != self.old_steering:
-            msg = struct.pack('>Ii', COMMAND_STEERING, int(self.new_steering * 32767))
-            self.sock.sendto(msg, (self.client_ip, UDP_PORT))
-            self.old_steering = self.new_steering
+        try:
+            vel_wheel = self.serial.readline().decode().rstrip()
+            print(vel_wheel)
+        except:
+            pass
 
 
 if __name__ == '__main__':
@@ -83,5 +80,4 @@ if __name__ == '__main__':
     arduino_cmd_receiver = ArduinoReceiver(client_ip="localhost", serial=serial_connection)
     for i in range(10):
         arduino_cmd_receiver.run_threaded()
-        print(arduino_cmd_receiver.new_throttle, arduino_cmd_receiver.new_steering)
         time.sleep(1)  # you cant send too fast!
