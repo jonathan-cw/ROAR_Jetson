@@ -44,6 +44,7 @@ class ArduinoReceiver:
         try:
             vel_wheel = self.serial.readline().decode().rstrip()
             self.fl, self.fr, self.bl, self.br = vel_wheel.split(" , ")
+            print(self.fl, self.fr, self.bl, self.br)
         except Exception as e:
             print("Error:", e)
 
