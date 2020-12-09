@@ -69,8 +69,8 @@ class ArduinoReceiver:
         try:
             vel_wheel = self.serial.readline().decode().rstrip()
             print(vel_wheel)
-        except:
-            pass
+        except Exception as e:
+            print(e)
 
 
 if __name__ == '__main__':
