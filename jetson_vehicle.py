@@ -149,7 +149,7 @@ class Vehicle:
                 elif entry.get('thread') and isinstance(p, RS_D435i):
                     self.front_rgb_img, self.front_depth_img = p.run_threaded()
                 elif isinstance(p, ArduinoReceiver):
-                    p.run_threaded()
+                    pass
                 elif isinstance(p, ViveTrackerClient):
                     p.run_threaded()
                 else:

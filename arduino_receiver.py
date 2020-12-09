@@ -30,29 +30,33 @@ class ArduinoReceiver:
 
     @staticmethod
     def _create_serial():
+        print("SERIAL CREATED")
         if 'win' in sys.platform:
-            serial = Serial(port='COM5', baudrate=9600, timeout=1, writeTimeout=1)
+            serial = Serial(port='COM5', baudrate=115200, timeout=1, writeTimeout=1)
         else:
-            serial = Serial(port='/dev/ttyACM0', baudrate=9600, timeout=1, writeTimeout=1)
+            serial = Serial(port='/dev/ttyACM0', baudrate=115200, timeout=1, writeTimeout=1)
         return serial
 
     def update(self):
         while True:
-            self.run_threaded()
+            self.poll()
 
-    def run_threaded(self, **args):
+
+    def poll(self):
         try:
             vel_wheel = self.serial.readline().decode().rstrip()
-            self.fl, self.fr, self.bl, self.br = vel_wheel.split(" , ")
-            print(self.fl, self.fr, self.bl, self.br)
+            self.logger.debug(vel_wheel)
         except Exception as e:
             print("Error:", e)
+
+    def run_threaded(self, **args):
+       pass
 
 
 if __name__ == '__main__':
     import time
 
-    serial_connection = Serial(port='/dev/ttyACM0', baudrate=9600, timeout=1, writeTimeout=1)
+    serial_connection = Serial(port='/dev/ttyACM0', baudrate=115200, timeout=1, writeTimeout=1)
     arduino_cmd_receiver = ArduinoReceiver(client_ip="localhost", serial=serial_connection)
 
     arduino_cmd_receiver.run_threaded()

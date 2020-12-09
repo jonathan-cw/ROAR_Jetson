@@ -133,12 +133,10 @@ class JetsonRunner:
 
                 # pass throttle and steering into the bridge
                 sensors_data, vehicle = self.convert_data()
-
                 # run a step of agent
                 vehicle_control = VehicleControl()
                 if self.auto_pilot:
                     vehicle_control: VehicleControl = self.agent.run_step(sensors_data=sensors_data, vehicle=vehicle)
-
                 # manual control always take precedence
                 if use_manual_control:
                     should_continue, vehicle_control = self.update_pygame(clock=clock)
@@ -148,7 +146,6 @@ class JetsonRunner:
                     # should_continue, _ = self.update_pygame_keyboard(clock=clock)
                 # self.logger.debug(f"Vehicle Control = [{vehicle_control}]")
                 # pass the output into sender to send it
-
                 self.jetson_vehicle.update_parts(new_throttle=vehicle_control.throttle,
                                                  new_steering=vehicle_control.steering)
         except KeyboardInterrupt:
