@@ -118,7 +118,7 @@ class JetsonRunner:
         except Exception as e:
             self.logger.error(f"Failed to initalize Vive Tracker: {e}")
 
-    def start_game_loop(self, use_manual_control=False):
+    def start_game_loop(self, use_manual_control=True):
         self.logger.info("Starting Game Loop")
         try:
             self.jetson_vehicle.start_part_threads()
