@@ -10,5 +10,5 @@
     "motor_min": 1350,
     "win_serial_port": "COM5",
     "theta_max": 1800,
-    "theta_min": 1200
+    "theta_min": 800
 }
