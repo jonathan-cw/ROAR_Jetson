@@ -76,7 +76,7 @@ class ArduinoReceiver:
 if __name__ == '__main__':
     import time
 
-    serial_connection = Serial("COM5", baudrate=115200, timeout=0.5, writeTimeout=0.5)
+    serial_connection = Serial(port='/dev/ttyACM0', baudrate=115200, timeout=1, writeTimeout=1)
     arduino_cmd_receiver = ArduinoReceiver(client_ip="localhost", serial=serial_connection)
     while True:
         arduino_cmd_receiver.run_threaded()
