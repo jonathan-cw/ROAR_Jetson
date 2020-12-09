@@ -31,9 +31,9 @@ class ArduinoReceiver:
     @staticmethod
     def _create_serial():
         if 'win' in sys.platform:
-            serial = Serial(port='COM5', baudrate=115200, timeout=1, writeTimeout=1)
+            serial = Serial(port='COM5', baudrate=9600, timeout=1, writeTimeout=1)
         else:
-            serial = Serial(port='/dev/ttyACM0', baudrate=115200, timeout=1, writeTimeout=1)
+            serial = Serial(port='/dev/ttyACM0', baudrate=9600, timeout=1, writeTimeout=1)
         return serial
 
     def update(self):
@@ -52,8 +52,8 @@ class ArduinoReceiver:
 if __name__ == '__main__':
     import time
 
-    serial_connection = Serial(port='/dev/ttyACM0', baudrate=115200, timeout=1, writeTimeout=1)
+    serial_connection = Serial(port='/dev/ttyACM0', baudrate=9600, timeout=1, writeTimeout=1)
     arduino_cmd_receiver = ArduinoReceiver(client_ip="localhost", serial=serial_connection)
-    while True:
-        arduino_cmd_receiver.run_threaded()
-        print(arduino_cmd_receiver.fl, arduino_cmd_receiver.fr, arduino_cmd_receiver.bl, arduino_cmd_receiver.br)
+
+    arduino_cmd_receiver.run_threaded()
+    print(arduino_cmd_receiver.fl, arduino_cmd_receiver.fr, arduino_cmd_receiver.bl, arduino_cmd_receiver.br)
